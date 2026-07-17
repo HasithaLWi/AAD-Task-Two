@@ -5,6 +5,7 @@ import lk.ijse.TaskTwo.entity.User;
 import lk.ijse.TaskTwo.repository.UserRepository;
 import lk.ijse.TaskTwo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     public void registerUser(UserDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.getUsername());
